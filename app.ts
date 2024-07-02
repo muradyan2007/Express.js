@@ -1,11 +1,15 @@
 
 const express = require('express');
+const bodyParser = require('body-parser');
+const linksRoutes = require('./routes/linksRoutes');
+
 const app = express();
+const PORT = 3000;
 
-app.get('/', (_req: any, res: { send: (arg0: string) => void; }) => {
-    res.send("hi");
-});
+app.use(bodyParser.json());
+app.use('/api', linksRoutes);
 
-app.listen(3000, () => {
-    console.log("server is running on http://localhost:3000");
+
+app.listen(PORT, () => {
+    console.log(`server is running on ${PORT}`);
 });

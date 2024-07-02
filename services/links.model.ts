@@ -1,4 +1,4 @@
-class Link {
+export class Link {
     static links: Link[] = [];
 
     id: number;
@@ -35,19 +35,20 @@ class Link {
         return newLink;
     }
 
-    static deleteOne(linkId: number): Link | null {
-        const index = Link.links.findIndex(link => link.id === linkId);
+    static deleteOne(linkId: number): boolean {
+        const index = Link.links.findIndex(link => link.id === linkId)
         if (index !== -1) {
-            return Link.links.splice(index, 1)[0];
+            Link.links.splice(index, 1);
+            return true;
+        } else {
+            return false;
         }
-        return null;
     }
 
-    static updateOne(linkId: number, shortLink: string, longLink: string): Link | null {
+    static updateOne(linkId: number, shortLink: string): Link | null {
         const link = Link.getOne(linkId);
         if (link) {
             link.shortLink = shortLink;
-            link.longLink = longLink;
             return link;
         }
         return null;
